@@ -5,15 +5,15 @@ Created on Thu Mar 15 15:11:45 2018
 @author: olem
 """
 import astropy.units as u
-import satellite_propagator
+import src.satellite_propagator as satprop
 import datetime
 from astroquery.vizier import Vizier
 import astropy.coordinates as coord
 
 #test position with STK values and Odin
 
-d = datetime.datetime(2018,3,15)
-position,velocity = satellite_propagator.get_position(d,satellite="mats",tlefile="tle_mats.txt")
+d = datetime.datetime(2018,3,15,0,0,0)
+position = satprop.get_position(d,satellite="MATS",tlefile="./test_file/mats.tle")
 
 
 
