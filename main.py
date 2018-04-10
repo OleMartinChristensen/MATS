@@ -9,15 +9,23 @@ import src.satellite_propagator as satprop
 import datetime
 from astroquery.vizier import Vizier
 import astropy.coordinates as coord
+import numpy as np
+import warnings
 
 #test position with STK values and Odin
-
-d = datetime.datetime(2018,3,15,0,0,0)
+d = datetime.datetime(2018,4,3,0,0,0)
 position = satprop.get_position(d,satellite="MATS",tlefile="./test_file/mats.tle")
+positions_from_STK = (1225.203926,-6818.719807,200.492145)
+error = np.array(position.position_ecef) - np.array(positions_from_STK)
+error_tot = error.dot(error.T)*1e3;
+if error_tot>10:
+    warnings.warn("Satellite position off by more than 10 m")
 
 
+#Find look vector for tangent point of MATS (92 km in orbit plane)
 
 
+#test star gazing
 Vizier.ROW_LIMIT = 50
 catalog_list = Vizier.find_catalogs('UCAC4')
 catalogs = Vizier.get_catalogs(catalog_list.keys())
