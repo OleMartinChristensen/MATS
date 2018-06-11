@@ -252,6 +252,21 @@ def SZAfromlla(lat,lon,alt,dt):
     
     return SZA
 
+def find_orbit_plane(satpos1_eci_1,satpos2_eci):
+    
+    n = np.cross(satpos1_eci_1,satpos2_eci)
+    n_norm = np.linalg.norm(n)
+    
+    return n_norm
+
+def los_from_tanpoint_spherical(satpos1_eci_1,satpos2_eci):
+    
+    n = np.cross(satpos1_eci_1,satpos2_eci)
+    n_norm = np.linalg.norm(n)
+    
+    return n_norm
+
+
 def starlist_from_ra_dec(ra_in,dec_in,width_in,height_in,Vmag):
     
 #This function takes a pointing in right acencion, declination (J2000) and give a 
